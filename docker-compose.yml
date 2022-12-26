@@ -1,0 +1,38 @@
+version: '3.8'
+
+services:
+  app:
+    build: .
+    container_name: urna-eletronica-app
+    ports:
+      - "3001:3000"
+    volumes:
+      - .:/user/app
+    depends_on:
+      - db
+
+  db:
+    build: .docker
+    container_name: urna-db
+    restart: always
+    tty: true
+    environment:
+      - POSTGRES_DB=urnaeletronica
+      - POSTGRES_USER=docker
+      - POSTGRES_PASSWORD=docker
+    volumes:
+      - .docker/dbdata:/var/lib/postgresql/data
+    ports:
+      - '5432:5432'
+
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: urna-db-pgadmin
+    tty: true
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=admin@admin.com
+      - PGADMIN_DEFAULT_PASSWORD=admin
+    ports:
+      - "8010:80"
+    depends_on:
+      - db
