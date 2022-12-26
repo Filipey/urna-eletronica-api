@@ -3,9 +3,46 @@
 
 generator client {
   provider = "prisma-client-js"
+  binaryTargets = ["native", "linux-musl-openssl-3.0.x"]
 }
 
 datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
+}
+
+model Person {
+  cpf String @id
+  name String
+  picture String?
+  uf String
+  hasVoted Boolean @default(false)
+  votes Vote[]
+}
+
+model Party {
+  number Int @id
+  name String
+  candidates Candidate[]
+}
+
+model Candidate {
+  number Int @id
+  uf String
+  role String
+  picture String?
+  name String
+  party Party @relation(fields: [partyNumber], references: [number])
+  partyNumber Int
+  recievedVotes Vote[]
+}
+
+model Vote {
+  timestamp Int
+  person Person @relation(fields: [personCpf], references: [cpf])
+  personCpf String
+  candidate Candidate @relation(fields: [candidateNumber], references: [number])
+  candidateNumber Int
+
+  @@id([personCpf, candidateNumber])
 }
