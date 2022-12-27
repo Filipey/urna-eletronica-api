@@ -17,13 +17,13 @@ services:
     restart: always
     tty: true
     environment:
-      - POSTGRES_DB=urnaeletronica
+      - POSTGRES_DB=urna-eletronica
       - POSTGRES_USER=docker
       - POSTGRES_PASSWORD=docker
     volumes:
       - .docker/dbdata:/var/lib/postgresql/data
     ports:
-      - '5432:5432'
+      - '5433:5432'
 
   pgadmin:
     image: dpage/pgadmin4
