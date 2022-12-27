@@ -1,7 +1,7 @@
 import { PrismaClient } from "@prisma/client";
-import { MockedCandidates } from "../src/mock/Candidates";
-import { MockedParties } from "../src/mock/Parties";
-import { MockedPersons } from "../src/mock/Persons";
+import { MockedCandidates } from "./Candidates";
+import { MockedParties } from "./Parties";
+import { MockedPersons } from "./Persons";
 
 const prisma = new PrismaClient();
 
