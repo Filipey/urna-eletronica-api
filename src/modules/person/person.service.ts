@@ -1,5 +1,5 @@
 import { Person, PrismaClient } from "@prisma/client";
-import { VotedCandidateDTO } from "../Candidate/dtos/voted-candidate-dto";
+import { VotedCandidateDTO } from "../candidate/dtos/voted-candidate-dto";
 import { CreatePersonDTO } from "./dtos/create-person.dto";
 import { UpdatePersonDTO } from "./dtos/update-person.dto";
 

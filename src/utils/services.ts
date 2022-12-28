@@ -1,9 +1,9 @@
 /* eslint-disable prefer-const */
 /* eslint-disable no-var */
-import { CandidateService } from "../modules/Candidate/candidate.service";
-import { PartyService } from "../modules/Party/party.service";
-import { PersonService } from "../modules/Person/person.service";
-import { VoteService } from "../modules/Vote/vote.service";
+import { CandidateService } from "../modules/candidate/candidate.service";
+import { PartyService } from "../modules/party/party.service";
+import { PersonService } from "../modules/person/person.service";
+import { VoteService } from "../modules/vote/vote.service";
 
 import { db } from "../database/db.client";
 
