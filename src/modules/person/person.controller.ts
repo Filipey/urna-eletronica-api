@@ -65,7 +65,7 @@ personRouter.post(
 );
 
 personRouter.delete(
-  "/cpf",
+  "/",
   async (req: Request<object, object, object, { cpf: string }>, res) => {
     const { cpf } = req.query;
 
@@ -79,7 +79,7 @@ personRouter.delete(
 );
 
 personRouter.put(
-  "/cpf",
+  "/",
   async (
     req: Request<object, object, UpdatePersonDTO, { cpf: string }>,
     res
