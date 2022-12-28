@@ -10,7 +10,7 @@ import { db } from "../database/db.client";
 let personService: PersonService;
 let partyService: PartyService;
 let candidateService: CandidateService;
-let voteService : VoteService;
+let voteService: VoteService;
 
 declare global {
   var __personService: PersonService | undefined;

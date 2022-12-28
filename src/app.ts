@@ -9,11 +9,15 @@ const app = express();
 
 app.use(express.json());
 
-app.use("/docs", serve, setup(undefined, {
-  swaggerOptions: {
-    url: "/swagger.json"
-  }
-}));
+app.use(
+  "/docs",
+  serve,
+  setup(undefined, {
+    swaggerOptions: {
+      url: "/swagger.json",
+    },
+  })
+);
 
 app.get("/api", (_req, res) => res.send("Hello from API!"));
 

@@ -1,3 +1,0 @@
-Module.exports = {
-  singleQuote: false
-}

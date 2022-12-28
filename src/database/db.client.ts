@@ -9,11 +9,13 @@ declare global {
 }
 
 if (!global.__db) {
-  global.__db = new PrismaClient({ datasources: {
-    db: {
-      url: process.env.RUNTIME_DATABASE_URL
-    }
-  } });
+  global.__db = new PrismaClient({
+    datasources: {
+      db: {
+        url: process.env.RUNTIME_DATABASE_URL,
+      },
+    },
+  });
 }
 
 db = global.__db;
