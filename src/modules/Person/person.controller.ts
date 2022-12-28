@@ -54,9 +54,9 @@ personRouter.delete(
   async (req: Request<object, object, object, { cpf: string }>, res) => {
     const { cpf } = req.query;
 
-    await personService.deleteByCpf(cpf);
+    const deletedPerson = await personService.deleteByCpf(cpf);
 
-    return res.status(204);
+    return res.status(200).json(deletedPerson);
   }
 );
 

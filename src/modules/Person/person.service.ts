@@ -56,8 +56,8 @@ export class PersonService {
     return await this.db.person.create({ data: personDTO });
   }
 
-  async deleteByCpf(cpf: string): Promise<void> {
-    await this.db.person.delete({
+  async deleteByCpf(cpf: string): Promise<Person> {
+    return await this.db.person.delete({
       where: {
         cpf: cpf,
       },
