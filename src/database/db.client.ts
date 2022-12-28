@@ -15,6 +15,7 @@ if (!global.__db) {
         url: process.env.RUNTIME_DATABASE_URL,
       },
     },
+    errorFormat: "minimal",
   });
 }
 

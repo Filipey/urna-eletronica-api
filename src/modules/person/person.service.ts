@@ -52,7 +52,7 @@ export class PersonService {
     return candidates;
   }
 
-  async save(personDTO: CreatePersonDTO): Promise<Person> {
+  async save(personDTO: CreatePersonDTO) {
     return await this.db.person.create({ data: personDTO });
   }
 

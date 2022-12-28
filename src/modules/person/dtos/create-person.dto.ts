@@ -1,4 +1,4 @@
-import { IsOptional, IsString, Length } from "class-validator";
+import { IsOptional, IsString, IsUppercase, Length } from "class-validator";
 
 export class CreatePersonDTO {
   @IsString()
@@ -13,5 +13,6 @@ export class CreatePersonDTO {
 
   @IsString()
   @Length(2)
+  @IsUppercase()
   readonly uf: string;
 }
