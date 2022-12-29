@@ -38,6 +38,12 @@ CREATE TABLE "Vote" (
     CONSTRAINT "Vote_pkey" PRIMARY KEY ("personCpf","candidateNumber")
 );
 
+-- CreateIndex
+CREATE UNIQUE INDEX "Person_picture_key" ON "Person"("picture");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "Candidate_picture_key" ON "Candidate"("picture");
+
 -- AddForeignKey
 ALTER TABLE "Candidate" ADD CONSTRAINT "Candidate_partyNumber_fkey" FOREIGN KEY ("partyNumber") REFERENCES "Party"("number") ON DELETE RESTRICT ON UPDATE CASCADE;
 

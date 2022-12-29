@@ -35,5 +35,11 @@ services:
       - PGADMIN_DEFAULT_PASSWORD=admin
     ports:
       - "8010:80"
+    volumes:
+      - .docker/pgadmindata:/var/lib/pgadmin
     depends_on:
       - db
+
+volumes:
+ dbdata:
+ pgadmindata:

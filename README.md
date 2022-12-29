@@ -1,5 +1,6 @@
-npm i
-npm run dev
+TESTS:
+- npm i
+- npm run test
 
 DOCKER:
 - docker-compose up -d
@@ -7,5 +8,11 @@ DOCKER:
 - In pgdmin, set ip address as the container ip
 
 PRISMA:
-- npx prisma generate 
-- npx prisma migrate dev --name init
+```sh
+# If is your first time running the container
+docker ps -a
+# Grep the address of the container urna-eletronica-api_app
+docker exec -it <CONTAINER_IP> sh
+npx prisma migrate deploy && npx prisma db seed
+exit
+```

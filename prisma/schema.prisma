@@ -14,7 +14,7 @@ datasource db {
 model Person {
   cpf String @id
   name String
-  picture String?
+  picture String? @unique
   uf String
   hasVoted Boolean @default(false)
   votes Vote[]
@@ -30,7 +30,7 @@ model Candidate {
   number Int @id
   uf String
   role String
-  picture String?
+  picture String? @unique
   name String
   party Party @relation(fields: [partyNumber], references: [number])
   partyNumber Int

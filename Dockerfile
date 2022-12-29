@@ -8,9 +8,6 @@ RUN npm install
 
 COPY . /user/app/
 
-RUN npx prisma migrate dev name --init
-
-RUN npx prisma db seed
 
 EXPOSE 3000
 

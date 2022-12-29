@@ -3,7 +3,13 @@ import { MockedCandidates } from "./Candidates";
 import { MockedParties } from "./Parties";
 import { MockedPersons } from "./Persons";
 
-const prisma = new PrismaClient();
+const prisma = new PrismaClient({
+  datasources: {
+    db: {
+      url: process.env.DATABASE_URL,
+    },
+  },
+});
 
 async function main() {
   await prisma.person.createMany({ data: MockedPersons });
