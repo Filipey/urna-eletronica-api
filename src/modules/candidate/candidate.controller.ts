@@ -53,14 +53,27 @@ candidateRouter.get(
 candidateRouter.post(
   "/",
   async (
-    req: Request<object, object, CreateCandidateDTO, { scratch: string }>,
+    req: Request<object, object, Omit<CreateCandidateDTO, "cpf">, object>,
     res
   ) => {
     const candidate = req.body;
-    const { scratch } = req.query;
 
     try {
-      await candidateService.save(candidate, scratch);
+      await candidateService.save(candidate);
+      return res.status(201).json({ message: "OK" });
+    } catch (error) {
+      handle(error, res);
+    }
+  }
+);
+
+candidateRouter.post(
+  "/scratch",
+  async (req: Request<object, object, CreateCandidateDTO, object>, res) => {
+    const candidate = req.body;
+
+    try {
+      await candidateService.saveCandidateFromScratch(candidate);
       return res.status(201).json({ message: "OK" });
     } catch (error) {
       handle(error, res);

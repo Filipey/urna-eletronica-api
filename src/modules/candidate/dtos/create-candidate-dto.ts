@@ -9,7 +9,7 @@ export class CreateCandidateDTO {
   readonly cpf: string;
 
   @IsOptional()
-  readonly picture: string | undefined;
+  readonly picture: string | null;
 
   @IsString()
   readonly uf: string;

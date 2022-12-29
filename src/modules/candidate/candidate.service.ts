@@ -41,20 +41,32 @@ export class CandidateService {
   }
 
   async save(
-    candidateDTO: CreateCandidateDTO,
-    scratch: string
+    candidateDTO: Omit<CreateCandidateDTO, "cpf">
   ): Promise<Candidate> {
-    if (scratch === "true") {
-      await this.db.person.create({
-        data: {
-          name: candidateDTO.name,
-          cpf: candidateDTO.cpf,
-          uf: candidateDTO.uf,
-          picture: candidateDTO.picture,
-          hasVoted: false,
-        },
-      });
-    }
+    return await this.db.candidate.create({
+      data: {
+        name: candidateDTO.name,
+        number: candidateDTO.number,
+        partyNumber: candidateDTO.partyNumber,
+        picture: candidateDTO.picture,
+        uf: candidateDTO.uf,
+        role: candidateDTO.role,
+      },
+    });
+  }
+
+  async saveCandidateFromScratch(
+    candidateDTO: CreateCandidateDTO
+  ): Promise<Candidate> {
+    await this.db.person.create({
+      data: {
+        name: candidateDTO.name,
+        cpf: candidateDTO.cpf,
+        uf: candidateDTO.uf,
+        picture: candidateDTO.picture,
+        hasVoted: false,
+      },
+    });
 
     return await this.db.candidate.create({
       data: {
