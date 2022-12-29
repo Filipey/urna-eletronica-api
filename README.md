@@ -1,11 +1,27 @@
 TESTS:
-- npm i
-- npm run test
+```js
+npm i
+npm run test
+```
 
-DOCKER:
-- docker-compose up -d
-- docker inspect <DATABASE_CONTAINER_ID> | grep "IPAddress"
-- In pgdmin, set ip address as the container ip
+DOCKER SETUP:
+```sh
+docker-compose build --no-cache
+docker-compose up -d
+
+# Postgres on port 5433
+# Pgadmin4 on port 8010
+# App on port 3001
+```
+
+```sh
+# To configure pgadmin4 connection, grep the container id 
+docker ps -a
+docker inspect <DATABASE_CONTAINER_ID> | grep "IPAddress"
+```
+In pgadmin4 interface, use the environment values to login
+Create a new Server with any name and set up the connection with the <DATABASE_CONTAINER_ID>
+Set the user and password with the environment values
 
 PRISMA:
 ```sh
