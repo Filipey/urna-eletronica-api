@@ -1,5 +1,86 @@
-import { PrismaClient } from "@prisma/client";
+import { Candidate, PrismaClient } from "@prisma/client";
+import { CandidateVotes } from "./dtos/candidate-votes";
+import { CreateCandidateDTO } from "./dtos/create-candidate-dto";
+import { UpdateCandidateDTO } from "./dtos/update-candidate-dto";
 
 export class CandidateService {
   constructor(private readonly db: PrismaClient) {}
+
+  async findAll(): Promise<Candidate[]> {
+    return await this.db.candidate.findMany();
+  }
+
+  async findByNumber(candidateNumber: number): Promise<Candidate> {
+    return await this.db.candidate.findUniqueOrThrow({
+      where: {
+        number: candidateNumber,
+      },
+    });
+  }
+
+  async findCandidateAccuracy(
+    candidateNumber: number
+  ): Promise<CandidateVotes> {
+    const votes = await this.db.candidate.findUniqueOrThrow({
+      where: { number: candidateNumber },
+      select: { recievedVotes: true, number: true },
+    });
+
+    const totalVotes = await this.db.vote.count({
+      where: {
+        candidateNumber: votes.number,
+      },
+    });
+
+    const candidateVotesCount = votes.recievedVotes.length;
+
+    const totalPercent = String(
+      (100 * candidateVotesCount) / totalVotes
+    ).concat("%");
+
+    return { totalVotes, totalPercent };
+  }
+
+  async save(candidateDTO: CreateCandidateDTO): Promise<Candidate> {
+    await this.db.person.create({
+      data: {
+        name: candidateDTO.name,
+        cpf: candidateDTO.cpf,
+        uf: candidateDTO.uf,
+        picture: candidateDTO.picture,
+        hasVoted: false,
+      },
+    });
+
+    return await this.db.candidate.create({ data: candidateDTO });
+  }
+
+  async update(
+    candidateDTO: UpdateCandidateDTO,
+    candidateNumber: number
+  ): Promise<Candidate> {
+    const candidate = await this.db.candidate.findUniqueOrThrow({
+      where: { number: candidateNumber },
+    });
+    const updatedCandidate: Candidate = {
+      ...candidate,
+      name: candidateDTO.name,
+      uf: candidateDTO.uf,
+      role: candidateDTO.role,
+      picture: candidateDTO.picture,
+    };
+
+    return await this.db.candidate.update({
+      where: {
+        number: candidateNumber,
+      },
+      data: updatedCandidate,
+    });
+  }
+
+  async delete(candidateNumber: number): Promise<Candidate> {
+    return await this.db.candidate.delete({
+      where: { number: candidateNumber },
+    });
+  }
 }
