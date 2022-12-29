@@ -10,19 +10,19 @@ export class CandidateService {
     return await this.db.candidate.findMany();
   }
 
-  async findByNumber(candidateNumber: number): Promise<Candidate> {
+  async findByNumber(candidateNumber: string): Promise<Candidate> {
     return await this.db.candidate.findUniqueOrThrow({
       where: {
-        number: candidateNumber,
+        number: parseInt(candidateNumber),
       },
     });
   }
 
   async findCandidateAccuracy(
-    candidateNumber: number
+    candidateNumber: string
   ): Promise<CandidateVotes> {
     const votes = await this.db.candidate.findUniqueOrThrow({
-      where: { number: candidateNumber },
+      where: { number: parseInt(candidateNumber) },
       select: { recievedVotes: true, number: true },
     });
 
@@ -33,26 +33,39 @@ export class CandidateService {
     });
 
     const candidateVotesCount = votes.recievedVotes.length;
+    const percent = (100 * candidateVotesCount) / totalVotes;
 
-    const totalPercent = String(
-      (100 * candidateVotesCount) / totalVotes
-    ).concat("%");
+    const totalPercent = isNaN(percent) ? "0%" : `${percent.toFixed(2)}%`;
 
     return { totalVotes, totalPercent };
   }
 
-  async save(candidateDTO: CreateCandidateDTO): Promise<Candidate> {
-    await this.db.person.create({
+  async save(
+    candidateDTO: CreateCandidateDTO,
+    scratch: string
+  ): Promise<Candidate> {
+    if (scratch === "true") {
+      await this.db.person.create({
+        data: {
+          name: candidateDTO.name,
+          cpf: candidateDTO.cpf,
+          uf: candidateDTO.uf,
+          picture: candidateDTO.picture,
+          hasVoted: false,
+        },
+      });
+    }
+
+    return await this.db.candidate.create({
       data: {
         name: candidateDTO.name,
-        cpf: candidateDTO.cpf,
-        uf: candidateDTO.uf,
+        number: candidateDTO.number,
+        partyNumber: candidateDTO.partyNumber,
         picture: candidateDTO.picture,
-        hasVoted: false,
+        uf: candidateDTO.uf,
+        role: candidateDTO.role,
       },
     });
-
-    return await this.db.candidate.create({ data: candidateDTO });
   }
 
   async update(
@@ -78,9 +91,9 @@ export class CandidateService {
     });
   }
 
-  async delete(candidateNumber: number): Promise<Candidate> {
+  async delete(candidateNumber: string): Promise<Candidate> {
     return await this.db.candidate.delete({
-      where: { number: candidateNumber },
+      where: { number: parseInt(candidateNumber) },
     });
   }
 }

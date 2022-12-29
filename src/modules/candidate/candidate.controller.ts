@@ -18,11 +18,10 @@ candidateRouter.get("/", async (_req, res) => {
 candidateRouter.get(
   "/number",
   async (
-    req: Request<object, object, object, { candidateNumber: number }>,
+    req: Request<object, object, object, { candidateNumber: string }>,
     res
   ) => {
     const { candidateNumber } = req.query;
-
     try {
       const candidate = await candidateService.findByNumber(candidateNumber);
       return res.status(200).json(candidate);
@@ -35,7 +34,7 @@ candidateRouter.get(
 candidateRouter.get(
   "/accuracy",
   async (
-    req: Request<object, object, object, { candidateNumber: number }>,
+    req: Request<object, object, object, { candidateNumber: string }>,
     res
   ) => {
     const { candidateNumber } = req.query;
@@ -53,11 +52,15 @@ candidateRouter.get(
 
 candidateRouter.post(
   "/",
-  async (req: Request<object, object, CreateCandidateDTO, object>, res) => {
+  async (
+    req: Request<object, object, CreateCandidateDTO, { scratch: string }>,
+    res
+  ) => {
     const candidate = req.body;
+    const { scratch } = req.query;
 
     try {
-      await candidateService.save(candidate);
+      await candidateService.save(candidate, scratch);
       return res.status(201).json({ message: "OK" });
     } catch (error) {
       handle(error, res);
@@ -68,7 +71,7 @@ candidateRouter.post(
 candidateRouter.delete(
   "/",
   async (
-    req: Request<object, object, object, { candidateNumber: number }>,
+    req: Request<object, object, object, { candidateNumber: string }>,
     res
   ) => {
     const { candidateNumber } = req.query;
