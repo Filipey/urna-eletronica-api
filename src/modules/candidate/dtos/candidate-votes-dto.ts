@@ -2,7 +2,7 @@ import { IsNumber, IsString } from "class-validator";
 
 export class CandidateVotes {
   @IsNumber()
-  readonly totalVotes: number;
+  readonly recievedVotes: number;
 
   @IsString()
   readonly totalPercent: string;

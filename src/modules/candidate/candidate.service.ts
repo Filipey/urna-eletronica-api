@@ -33,7 +33,7 @@ export class CandidateService {
 
     const totalPercent = isNaN(percent) ? "0%" : `${percent.toFixed(2)}%`;
 
-    return { totalVotes: candidateVotesCount, totalPercent };
+    return { recievedVotes: candidateVotesCount, totalPercent };
   }
 
   async findAllPresidents(): Promise<Candidate[]> {
