@@ -19,16 +19,16 @@ docker-compose up -d
 docker ps -a
 docker inspect <DATABASE_CONTAINER_ID> | grep "IPAddress"
 ```
-In pgadmin4 interface, use the environment values to login
-Create a new Server with any name and set up the connection with the <DATABASE_CONTAINER_ID>
-Set the user and password with the environment values
+- In pgadmin4 interface, use the environment values to login
+- Create a new Server with any name and set up the connection with the <DATABASE_CONTAINER_ID>
+- Set the user and password with the environment values
 
 PRISMA:
 ```sh
 # If is your first time running the container
 docker ps -a
-# Grep the address of the container urna-eletronica-api_app
-docker exec -it <CONTAINER_IP> sh
+# Grep the ID of the container urna-eletronica-api_app
+docker exec -it <CONTAINER_ID> sh
 npx prisma migrate deploy && npx prisma db seed
 exit
 ```
