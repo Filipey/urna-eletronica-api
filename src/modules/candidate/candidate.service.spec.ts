@@ -1,6 +1,7 @@
 import { Candidate } from "@prisma/client";
 import { prismaMock } from "../../../test/singleton";
 import { CandidateService } from "./candidate.service";
+import { CandidateVotes } from "./dtos/candidate-votes";
 import { CreateCandidateDTO } from "./dtos/create-candidate-dto";
 
 describe("Candidate Service", () => {
@@ -76,5 +77,98 @@ describe("Candidate Service", () => {
     expect(prismaMock.person.create).toHaveBeenCalled();
     expect(prismaMock.candidate.create).toHaveBeenCalled();
     expect(expectedOutput).toStrictEqual(createdCandidate);
+  });
+
+  it("Should update a candidate", async () => {
+    const expectedOutput: Candidate = {
+      ...mockCandidate,
+      role: "SENATOR",
+    };
+
+    const updatedCandidate = {
+      ...mockCandidate,
+      role: "SENATOR",
+    };
+
+    prismaMock.candidate.findFirstOrThrow.mockResolvedValue(mockCandidate);
+    prismaMock.candidate.update.mockResolvedValue(updatedCandidate);
+
+    const updatedCandidateResponse = await service.update(
+      updatedCandidate,
+      mockCandidate.number
+    );
+
+    expect(prismaMock.candidate.findUniqueOrThrow).toHaveBeenCalled();
+    expect(prismaMock.candidate.update).toHaveBeenCalled();
+    expect(expectedOutput).toStrictEqual(updatedCandidateResponse);
+  });
+
+  it("Should delete a candidate", async () => {
+    const searchNumber = String(mockCandidate.number);
+    const expectedOutput = { ...mockCandidate };
+
+    prismaMock.candidate.delete.mockResolvedValue(mockCandidate);
+
+    const deletedCandidate = await service.delete(searchNumber);
+
+    expect(prismaMock.candidate.delete).toHaveBeenCalled();
+    expect(expectedOutput).toStrictEqual(deletedCandidate);
+  });
+
+  it("Should list all candidates", async () => {
+    const expectedOutput: Candidate[] = [
+      {
+        ...mockCandidate,
+      },
+      {
+        name: "Tester candidate",
+        number: 333,
+        partyNumber: 51,
+        picture: "tester.jpeg",
+        role: "SENATOR",
+        uf: "MG",
+      },
+    ];
+
+    prismaMock.candidate.findMany.mockResolvedValue(expectedOutput);
+
+    const candidatesResponses = await service.findAll();
+
+    expect(prismaMock.candidate.findMany).toHaveBeenCalled();
+    expect(expectedOutput).toStrictEqual(candidatesResponses);
+  });
+
+  it("Should find a candidate by his number", async () => {
+    const expectedOutput = { ...mockCandidate };
+    const searchNumber = String(mockCandidate.number);
+
+    prismaMock.candidate.findUniqueOrThrow.mockResolvedValue(expectedOutput);
+
+    const candidateResponse = await service.findByNumber(searchNumber);
+
+    expect(prismaMock.candidate.findUniqueOrThrow).toHaveBeenCalled();
+    expect(expectedOutput).toStrictEqual(candidateResponse);
+  });
+
+  it("Should return the candidate accuracy", async () => {
+    const expectedOutput: CandidateVotes = {
+      totalVotes: 0,
+      totalPercent: "0%",
+    };
+    const searchNumber = String(mockCandidate.number);
+
+    const mockSearch = {
+      ...mockCandidate,
+      recievedVotes: [],
+    };
+
+    prismaMock.candidate.findUniqueOrThrow.mockResolvedValue(mockSearch);
+    prismaMock.vote.count.mockResolvedValue(expectedOutput.totalVotes);
+
+    const accuracyResponse = await service.findCandidateAccuracy(searchNumber);
+
+    expect(prismaMock.candidate.findUniqueOrThrow).toHaveBeenCalled();
+    expect(prismaMock.vote.count).toHaveBeenCalled();
+    expect(expectedOutput).toStrictEqual(accuracyResponse);
   });
 });
