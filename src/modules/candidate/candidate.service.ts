@@ -1,5 +1,5 @@
 import { Candidate, PrismaClient } from "@prisma/client";
-import { CandidateVotes } from "./dtos/candidate-votes";
+import { CandidateVotes } from "./dtos/candidate-votes-dto";
 import { CreateCandidateDTO } from "./dtos/create-candidate-dto";
 import { UpdateCandidateDTO } from "./dtos/update-candidate-dto";
 
@@ -26,18 +26,38 @@ export class CandidateService {
       select: { recievedVotes: true, number: true },
     });
 
-    const totalVotes = await this.db.vote.count({
-      where: {
-        candidateNumber: votes.number,
-      },
-    });
+    const totalVotes = await this.db.person.count();
 
     const candidateVotesCount = votes.recievedVotes.length;
     const percent = (100 * candidateVotesCount) / totalVotes;
 
     const totalPercent = isNaN(percent) ? "0%" : `${percent.toFixed(2)}%`;
 
-    return { totalVotes, totalPercent };
+    return { totalVotes: candidateVotesCount, totalPercent };
+  }
+
+  async findAllPresidents(): Promise<Candidate[]> {
+    return this.db.candidate.findMany({
+      where: {
+        role: "PRESIDENT",
+      },
+    });
+  }
+
+  async findAllSenators(): Promise<Candidate[]> {
+    return this.db.candidate.findMany({
+      where: {
+        role: "SENATOR",
+      },
+    });
+  }
+
+  async findAllGovernors(): Promise<Candidate[]> {
+    return this.db.candidate.findMany({
+      where: {
+        role: "GOVERNOR",
+      },
+    });
   }
 
   async save(

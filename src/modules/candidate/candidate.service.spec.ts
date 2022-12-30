@@ -1,7 +1,7 @@
 import { Candidate } from "@prisma/client";
 import { prismaMock } from "../../../test/singleton";
 import { CandidateService } from "./candidate.service";
-import { CandidateVotes } from "./dtos/candidate-votes";
+import { CandidateVotes } from "./dtos/candidate-votes-dto";
 import { CreateCandidateDTO } from "./dtos/create-candidate-dto";
 
 describe("Candidate Service", () => {
@@ -163,12 +163,12 @@ describe("Candidate Service", () => {
     };
 
     prismaMock.candidate.findUniqueOrThrow.mockResolvedValue(mockSearch);
-    prismaMock.vote.count.mockResolvedValue(expectedOutput.totalVotes);
+    prismaMock.person.count.mockResolvedValue(expectedOutput.totalVotes);
 
     const accuracyResponse = await service.findCandidateAccuracy(searchNumber);
 
     expect(prismaMock.candidate.findUniqueOrThrow).toHaveBeenCalled();
-    expect(prismaMock.vote.count).toHaveBeenCalled();
+    expect(prismaMock.person.count).toHaveBeenCalled();
     expect(expectedOutput).toStrictEqual(accuracyResponse);
   });
 });
