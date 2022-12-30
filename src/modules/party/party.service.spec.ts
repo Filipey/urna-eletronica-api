@@ -1,4 +1,4 @@
-import { Party } from "@prisma/client";
+import { Candidate, Party } from "@prisma/client";
 import { prismaMock } from "../../../test/singleton";
 import { PartyService } from "./party.service";
 
@@ -94,7 +94,7 @@ describe("Party Service", () => {
   });
 
   it("Should list all Party candidates", async () => {
-    const expectedResponse = [
+    const expectedResponse: Candidate[] = [
       {
         name: "John Doe Junior",
         picture: "john_doe_junior.jpeg",
@@ -102,6 +102,8 @@ describe("Party Service", () => {
         partyNumber: 77,
         uf: "MG",
         role: "PRESIDENT",
+        substituteName: "John Doe Junior Child",
+        substitutePicture: "john_doe_junior_child.jpeg",
       },
       {
         name: "John Doe Uncle",
@@ -110,6 +112,8 @@ describe("Party Service", () => {
         partyNumber: 77,
         uf: "MG",
         role: "SENATOR",
+        substituteName: "John Doe Uncle Child",
+        substitutePicture: "john_doe_junior_child.jpeg",
       },
     ];
 

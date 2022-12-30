@@ -22,4 +22,10 @@ export class CreateCandidateDTO {
 
   @IsString()
   readonly role: string;
+
+  @IsOptional()
+  readonly substituteName: string;
+
+  @IsOptional()
+  readonly substitutePicture: string;
 }

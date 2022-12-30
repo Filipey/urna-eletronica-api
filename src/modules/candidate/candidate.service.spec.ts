@@ -17,6 +17,8 @@ describe("Candidate Service", () => {
       partyNumber: 66,
       uf: "MG",
       role: "PRESIDENT",
+      substituteName: "John Doe Clone",
+      substitutePicture: "john_doe_clone.jpeg",
     };
   });
 
@@ -35,6 +37,8 @@ describe("Candidate Service", () => {
       role: "PRESIDENT",
       number: 1235,
       uf: "MG",
+      substituteName: "John Doe Clone",
+      substitutePicture: "john_doe_clone.jpeg",
     };
 
     prismaMock.candidate.create.mockResolvedValue(createCandidateDTO);
@@ -59,6 +63,8 @@ describe("Candidate Service", () => {
       number: 1235,
       uf: "MG",
       cpf: "1298237423",
+      substituteName: "John Doe Clone",
+      substitutePicture: "john_doe_clone.jpeg",
     };
 
     prismaMock.person.create.mockResolvedValue({
@@ -127,6 +133,8 @@ describe("Candidate Service", () => {
         picture: "tester.jpeg",
         role: "SENATOR",
         uf: "MG",
+        substituteName: "Tester candidate junior",
+        substitutePicture: "tester_junior.jpeg",
       },
     ];
 
@@ -152,7 +160,7 @@ describe("Candidate Service", () => {
 
   it("Should return the candidate accuracy", async () => {
     const expectedOutput: CandidateVotes = {
-      totalVotes: 0,
+      recievedVotes: 0,
       totalPercent: "0%",
     };
     const searchNumber = String(mockCandidate.number);
@@ -163,7 +171,7 @@ describe("Candidate Service", () => {
     };
 
     prismaMock.candidate.findUniqueOrThrow.mockResolvedValue(mockSearch);
-    prismaMock.person.count.mockResolvedValue(expectedOutput.totalVotes);
+    prismaMock.person.count.mockResolvedValue(expectedOutput.recievedVotes);
 
     const accuracyResponse = await service.findCandidateAccuracy(searchNumber);
 
