@@ -24,6 +24,8 @@ CREATE TABLE "Candidate" (
     "role" TEXT NOT NULL,
     "picture" TEXT,
     "name" TEXT NOT NULL,
+    "substituteName" TEXT,
+    "substitutePicture" TEXT,
     "partyNumber" INTEGER NOT NULL,
 
     CONSTRAINT "Candidate_pkey" PRIMARY KEY ("number")
@@ -31,7 +33,7 @@ CREATE TABLE "Candidate" (
 
 -- CreateTable
 CREATE TABLE "Vote" (
-    "timestamp" INTEGER NOT NULL,
+    "timestamp" DOUBLE PRECISION NOT NULL,
     "personCpf" TEXT NOT NULL,
     "candidateNumber" INTEGER NOT NULL,
 

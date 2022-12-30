@@ -26,8 +26,9 @@ docker inspect <DATABASE_CONTAINER_ID> | grep "IPAddress"
 PRISMA:
 ```sh
 # If is your first time running the container
-docker ps -a
 # Grep the ID of the container urna-eletronica-api_app
+docker ps -a
+
 docker exec -it <CONTAINER_ID> sh
 npx prisma migrate deploy && npx prisma db seed
 exit

@@ -32,13 +32,15 @@ model Candidate {
   role String
   picture String? @unique
   name String
+  substituteName String?
+  substitutePicture String?
   party Party @relation(fields: [partyNumber], references: [number])
   partyNumber Int
   recievedVotes Vote[]
 }
 
 model Vote {
-  timestamp Int
+  timestamp Float
   person Person @relation(fields: [personCpf], references: [cpf])
   personCpf String
   candidate Candidate @relation(fields: [candidateNumber], references: [number])
