@@ -60,7 +60,55 @@ export class VoteService {
     const percent = (100 * countedVotes) / totalVotes;
     const clearedVotes = isNaN(percent) ? "0%" : percent.toFixed(2) + "%";
 
-    return { totalVotes, remainingVotes, clearedVotes };
+    return { totalVotes, countedVotes, remainingVotes, clearedVotes };
+  }
+
+  async findPresidentAccuracy(): Promise<VotesAccuracyDTO> {
+    const totalVotes = await this.db.person.count();
+    const countedVotes = await this.db.vote.count({
+      where: {
+        candidate: {
+          role: "PRESIDENT",
+        },
+      },
+    });
+    const remainingVotes = totalVotes - countedVotes;
+    const percent = (100 * countedVotes) / totalVotes;
+    const clearedVotes = isNaN(percent) ? "0%" : percent.toFixed(2) + "%";
+
+    return { totalVotes, countedVotes, remainingVotes, clearedVotes };
+  }
+
+  async findGovernorAccuracy(): Promise<VotesAccuracyDTO> {
+    const totalVotes = await this.db.person.count();
+    const countedVotes = await this.db.vote.count({
+      where: {
+        candidate: {
+          role: "GOVERNOR",
+        },
+      },
+    });
+    const remainingVotes = totalVotes - countedVotes;
+    const percent = (100 * countedVotes) / totalVotes;
+    const clearedVotes = isNaN(percent) ? "0%" : percent.toFixed(2) + "%";
+
+    return { totalVotes, countedVotes, remainingVotes, clearedVotes };
+  }
+
+  async findSenatorAccuracy(): Promise<VotesAccuracyDTO> {
+    const totalVotes = await this.db.person.count();
+    const countedVotes = await this.db.vote.count({
+      where: {
+        candidate: {
+          role: "SENATOR",
+        },
+      },
+    });
+    const remainingVotes = totalVotes - countedVotes;
+    const percent = (100 * countedVotes) / totalVotes;
+    const clearedVotes = isNaN(percent) ? "0%" : percent.toFixed(2) + "%";
+
+    return { totalVotes, countedVotes, remainingVotes, clearedVotes };
   }
 
   async vote(personCpf: string, candidateNumber: number): Promise<void> {

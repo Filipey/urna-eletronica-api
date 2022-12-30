@@ -50,6 +50,33 @@ voteRouter.get("/accuracy", async (_req, res) => {
   }
 });
 
+voteRouter.get("/accuracy/president", async (_req, res) => {
+  try {
+    const accuracy = await voteService.findPresidentAccuracy();
+    return res.status(200).json(accuracy);
+  } catch (error) {
+    handle(error, res);
+  }
+});
+
+voteRouter.get("/accuracy/governor", async (_req, res) => {
+  try {
+    const accuracy = await voteService.findGovernorAccuracy();
+    return res.status(200).json(accuracy);
+  } catch (error) {
+    handle(error, res);
+  }
+});
+
+voteRouter.get("/accuracy/senator", async (_req, res) => {
+  try {
+    const accuracy = await voteService.findSenatorAccuracy();
+    return res.status(200).json(accuracy);
+  } catch (error) {
+    handle(error, res);
+  }
+});
+
 voteRouter.post(
   "/",
   async (req: Request<object, object, PersonVoteDTO, object>, res) => {

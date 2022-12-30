@@ -7,6 +7,9 @@ export class VotesAccuracyDTO {
   @IsNumber()
   readonly remainingVotes: number;
 
+  @IsNumber()
+  readonly countedVotes: number;
+
   @IsString()
   readonly clearedVotes: string;
 }
