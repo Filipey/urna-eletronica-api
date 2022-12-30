@@ -7,7 +7,9 @@ export const MockedCandidates: Candidate[] = [
     partyNumber: 26,
     picture: "neymar.jpeg",
     uf: "SP",
-    role: "PRESIDENT"    
+    role: "PRESIDENT",
+    substituteName: "Vinícius José Paixão de Oliveira Júnior",
+    substitutePicture: "vinicius_junior.jpeg",
   },
   {
     name: "Bruna Reis Maia",
@@ -15,7 +17,9 @@ export const MockedCandidates: Candidate[] = [
     partyNumber: 66,
     picture: "bruna_marquezine.jpeg",
     uf: "RJ",
-    role: "PRESIDENT"
+    role: "PRESIDENT",
+    substituteName: "Rafaella Freitas Ferreira de Castro Matthaus",
+    substitutePicture: "rafa_kalliman.jpeg",
   },
   {
     name: "Arthur Lopes",
@@ -24,6 +28,8 @@ export const MockedCandidates: Candidate[] = [
     picture: "arthur_lopes.jpeg",
     uf: "MG",
     role: "GORVENOR",
+    substituteName: "João do Arroz",
+    substitutePicture: "joao_arroz.jpeg",
   },
   {
     name: "Ana Sophia Rocha",
@@ -32,6 +38,8 @@ export const MockedCandidates: Candidate[] = [
     picture: "ana_sophia.jpeg",
     uf: "MG",
     role: "GORVENOR",
+    substituteName: "Carla do Tomate",
+    substitutePicture: "carla_tomate.jpeg",
   },
   {
     name: "Rafael Costela",
@@ -40,6 +48,8 @@ export const MockedCandidates: Candidate[] = [
     picture: "rafael_costela.jpeg",
     uf: "MG",
     role: "SENATOR",
+    substituteName: "Gabriel Japones",
+    substitutePicture: "gabriel_japones.jpeg",
   },
   {
     name: "Lívia Almeida",
@@ -47,6 +57,8 @@ export const MockedCandidates: Candidate[] = [
     partyNumber: 66,
     picture: "livia_almeida.jpeg",
     uf: "MG",
-    role: "SENATOR"
-  }
+    role: "SENATOR",
+    substituteName: "Letícia Fazendeira",
+    substitutePicture: "leticia_fazenda.jpeg",
+  },
 ];
