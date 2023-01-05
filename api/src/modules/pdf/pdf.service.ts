@@ -47,7 +47,9 @@ export class PdfService {
       ? await this.fetchImage(person.picture)
       : "No Image provided";
 
-    const timestamp = formatDate(new Date());
+    const timestamp = formatDate(Date.now());
+
+    if (!personVotes.votes) throw new Error("This person doesnt voted yet1!");
 
     return { person, personPicture, timestamp, personVotes: personVotes.votes };
   }
@@ -69,9 +71,7 @@ export class PdfService {
   }
 
   private drawContent(doc: PDFKit.PDFDocument, metaData: PdfMetadata): void {
-    const voteHour = formatDate(
-      new Date(metaData.personVotes.slice(-1)[0].timestamp * 1000)
-    );
+    const voteHour = formatDate(metaData.personVotes.slice(-1)[0].timestamp);
 
     doc
       .fontSize(14)
