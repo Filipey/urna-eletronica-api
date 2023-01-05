@@ -6,6 +6,7 @@ npm run test
 
 DOCKER SETUP:
 ```sh
+chmod +x .docker/entrypoint.sh # Linux
 docker-compose build --no-cache
 docker-compose up -d
 
