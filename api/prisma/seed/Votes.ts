@@ -26,4 +26,29 @@ export const MockedVotes: Vote[] = [
     candidateNumber: 337,
     timestamp: Date.now(),
   },
+  {
+    personCpf: "89234174211",
+    candidateNumber: 6,
+    timestamp: Date.now(),
+  },
+  {
+    personCpf: "89234174211",
+    candidateNumber: 90,
+    timestamp: Date.now(),
+  },
+  {
+    personCpf: "89234174211",
+    candidateNumber: 76,
+    timestamp: Date.now(),
+  },
+  {
+    personCpf: "89234174211",
+    candidateNumber: 441,
+    timestamp: Date.now(),
+  },
+  {
+    personCpf: "89234174211",
+    candidateNumber: 336,
+    timestamp: Date.now(),
+  },
 ];
