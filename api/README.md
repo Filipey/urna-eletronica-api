@@ -27,3 +27,6 @@ npx prisma migrate deploy && npx prisma db seed
 npx prisma studio
 exit
 ```
+
+POSTMAN:
+https://www.postman.com/filipeyzi/workspace/tp-eng-software-ii/overview
