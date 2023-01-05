@@ -1,16 +1,7 @@
-FROM node:alpine
+FROM node:lts-alpine
 
-WORKDIR /user/app
+RUN apk add --no-cache bash
 
-COPY package.json ./
+USER node
 
-COPY prisma /user/app/prisma
-
-RUN npm install
-
-COPY . /user/app/
-
-
-EXPOSE 3000
-
-CMD ["npm", "run", "dev"]
+WORKDIR /home/node/app

@@ -1,4 +1,4 @@
 #!/bin/bash
 
-npx prisma migrate dev name --init
-npx prisma db seed
+npm install --legacy-peer-deps
+npm run dev
