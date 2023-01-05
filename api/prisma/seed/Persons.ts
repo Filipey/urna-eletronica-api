@@ -17,10 +17,10 @@ export const MockedPersons: Person[] = [
   },
   {
     name: "Neymar da Silva Santos Júnior",
-    cpf: "1010101010101",
+    cpf: "10101010101",
     uf: "SP",
     picture: "https://pbs.twimg.com/media/FiRRfNfXEAMCwmk.jpg",
-    hasVoted: false,
+    hasVoted: true,
   },
   {
     name: "Fausto Corrêa da Silva",
