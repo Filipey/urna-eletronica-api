@@ -55,7 +55,23 @@ export class CandidateService {
   async findAllGovernors(): Promise<Candidate[]> {
     return this.db.candidate.findMany({
       where: {
-        role: "GOVERNOR",
+        role: "GORVERNOR",
+      },
+    });
+  }
+
+  async findAllRepresentatives(): Promise<Candidate[]> {
+    return this.db.candidate.findMany({
+      where: {
+        role: "REPRESENTATIVE",
+      },
+    });
+  }
+
+  async findAllCongressman(): Promise<Candidate[]> {
+    return this.db.candidate.findMany({
+      where: {
+        role: "CONGRESSMAN",
       },
     });
   }

@@ -15,6 +15,51 @@ candidateRouter.get("/", async (_req, res) => {
   }
 });
 
+candidateRouter.get("/president", async (_req, res) => {
+  try {
+    const candidates = await candidateService.findAllPresidents();
+    return res.status(200).json(candidates);
+  } catch (error) {
+    handle(error, res);
+  }
+});
+
+candidateRouter.get("/governor", async (_req, res) => {
+  try {
+    const candidates = await candidateService.findAllGovernors();
+    return res.status(200).json(candidates);
+  } catch (error) {
+    handle(error, res);
+  }
+});
+
+candidateRouter.get("/senator", async (_req, res) => {
+  try {
+    const candidates = await candidateService.findAllSenators();
+    return res.status(200).json(candidates);
+  } catch (error) {
+    handle(error, res);
+  }
+});
+
+candidateRouter.get("/representative", async (_req, res) => {
+  try {
+    const candidates = await candidateService.findAllRepresentatives();
+    return res.status(200).json(candidates);
+  } catch (error) {
+    handle(error, res);
+  }
+});
+
+candidateRouter.get("/congressman", async (_req, res) => {
+  try {
+    const candidates = await candidateService.findAllCongressman();
+    return res.status(200).json(candidates);
+  } catch (error) {
+    handle(error, res);
+  }
+});
+
 candidateRouter.get(
   "/number",
   async (
