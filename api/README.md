@@ -10,18 +10,8 @@ docker-compose build --no-cache
 docker-compose up -d
 
 # Postgres on port 5433
-# Pgadmin4 on port 8010
 # App on port 3001
 ```
-
-```sh
-# To configure pgadmin4 connection, grep the container id 
-docker ps -a
-docker inspect <DATABASE_CONTAINER_ID> | grep "IPAddress"
-```
-- In pgadmin4 interface, use the environment values to login
-- Create a new Server with any name and set up the connection with the <DATABASE_CONTAINER_ID>
-- Set the user and password with the environment values
 
 PRISMA:
 ```sh
@@ -29,7 +19,10 @@ PRISMA:
 # Grep the ID of the container urna-eletronica-api_app
 docker ps -a
 
-docker exec -it <CONTAINER_ID> sh
+docker-compose exec app bash
 npx prisma migrate deploy && npx prisma db seed
+
+# If you wanna see the data in prisma studio run
+npx prisma studio
 exit
 ```

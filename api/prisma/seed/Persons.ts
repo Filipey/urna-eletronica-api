@@ -41,7 +41,7 @@ export const MockedPersons: Person[] = [
   {
     name: "Adenor Leonardo Bacchi",
     cpf: "29292929292",
-    uf: "RS",
+    uf: "SP",
     picture:
       "https://www.lance.com.br/files/article_main/uploads/2022/12/09/6393adf631239.jpeg",
     hasVoted: false,
@@ -49,7 +49,7 @@ export const MockedPersons: Person[] = [
   {
     name: "Celso Yunes Portiolli",
     cpf: "66666666666",
-    uf: "PR",
+    uf: "SP",
     picture:
       "https://jpimg.com.br/uploads/2021/10/design-sem-nome-2021-10-07t110420.956.jpg",
     hasVoted: false,
@@ -73,7 +73,7 @@ export const MockedPersons: Person[] = [
   {
     name: "Bruna Reis Maia",
     cpf: "89234174211",
-    uf: "RJ",
+    uf: "MG",
     picture:
       "https://nsc-total-wp.s3.sa-east-1.amazonaws.com/wp-content/uploads/2022/10/bruna-marquezine-supergirl-1.jpg",
     hasVoted: false,
@@ -81,14 +81,14 @@ export const MockedPersons: Person[] = [
   {
     name: "Manoela Latini Gavassi Francisco",
     cpf: "61236123909",
-    uf: "SP",
+    uf: "MG",
     picture: "https://www.rbsdirect.com.br/imagesrc/25748871.jpg?w=700",
     hasVoted: false,
   },
   {
     name: "Vinicius Fernandes",
     cpf: "93437283123",
-    uf: "PR",
+    uf: "MG",
     picture:
       "https://images.unsplash.com/photo-1615813967515-e1838c1c5116?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80",
     hasVoted: false,
@@ -128,7 +128,7 @@ export const MockedPersons: Person[] = [
   {
     name: "Yasmin da Conceição",
     cpf: "33333333335",
-    uf: "MG",
+    uf: "SP",
     picture:
       "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80",
     hasVoted: false,
