@@ -76,7 +76,7 @@ export const MockedPersons: Person[] = [
     uf: "MG",
     picture:
       "https://nsc-total-wp.s3.sa-east-1.amazonaws.com/wp-content/uploads/2022/10/bruna-marquezine-supergirl-1.jpg",
-    hasVoted: false,
+    hasVoted: true,
   },
   {
     name: "Manoela Latini Gavassi Francisco",
