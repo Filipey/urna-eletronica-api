@@ -49,8 +49,8 @@ describe("Vote Service", () => {
     const expectedResponse: VotesAccuracyDTO = {
       clearedVotes: "0.00%",
       countedVotes: 0,
-      totalVotes: 54,
-      remainingVotes: 54,
+      totalVotes: 90,
+      remainingVotes: 90,
     };
 
     prismaMock.person.count.mockResolvedValue(18);

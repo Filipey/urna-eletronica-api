@@ -71,6 +71,7 @@ export class PersonService {
       name: personDTO.name,
       picture: personDTO.picture,
       uf: personDTO.uf,
+      hasVoted: personDTO.hasVoted,
     };
 
     return await this.db.person.update({
